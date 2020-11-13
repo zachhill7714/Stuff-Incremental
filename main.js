@@ -18,11 +18,15 @@ var updateTitle = window.setInterval(function () {
     document.title = "Stuff Incremental - " + gameData.stuff + " stuff"
 }, 2000)
 
+function update(id, content) {
+    document.getElementById(id).innerHTML = content;
+  }
+
 function getStuff() {
     gameData.stuff += gameData.stuffPerClick * gameData.prestigeMultiplier
     gameData.totalStuff += gameData.stuffPerClick * gameData.prestigeMultiplier
-    document.getElementById("stuffGot").innerHTML = gameData.stuff + " stuff"
-    document.getElementById("totalStuffGot").innerHTML = "total stuff got: " + gameData.totalStuff
+    update(stuffGot, gameData.stuff + " stuff")
+    update(totalStuffGot, "total stuff got: " + gameData.totalStuff)
 }
 
 function getStuffPerClick() {
@@ -35,7 +39,7 @@ function getStuffPerClick() {
         }
         gameData.stuff -= gameData.stuffPerClickCost
         gameData.stuffPerClickCost *= 5
-        document.getElementById("getStuffPerClick").innerHTML = "buy stuff per click, cost: " + gameData.stuffPerClickCost + ", level: " + gameData.stuffPerClickLevel
+        update("getStuffPerClick", "buy stuff per click, cost: " + gameData.stuffPerClickCost + ", level: " + gameData.stuffPerClickLevel)
         document.getElementById("stuffGot").innerHTML = gameData.stuff + " stuff"
         document.getElementById("stuffPerClick").innerHTML = "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click"
         document.getElementById("autoClickers").innerHTML = "you have " + gameData.autoClickers + " autoclickers, clicking " +
