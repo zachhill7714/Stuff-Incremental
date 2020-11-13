@@ -25,8 +25,8 @@ function update(id, content) {
 function getStuff() {
     gameData.stuff += gameData.stuffPerClick * gameData.prestigeMultiplier
     gameData.totalStuff += gameData.stuffPerClick * gameData.prestigeMultiplier
-    update("stuffGot", gameData.stuff + " stuff")
-    update("totalStuffGot", "total stuff got: " + gameData.totalStuff)
+    update("stuffGot", format(gameData.stuff, "engineering") + " stuff")
+    update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff, "engineering"))
 }
 
 function getStuffPerClick() {
@@ -43,8 +43,8 @@ function getStuffPerClick() {
         update("stuffGot", gameData.stuff + " stuff")
         update("stuffPerClick", "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click")
         update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
-            Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
-                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second")
+        format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "engineering") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
+            gameData.stuffPerClick * gameData.prestigeMultiplier), "engineering") + " stuff per second")
     }
 }
 
@@ -77,8 +77,8 @@ function buyAutoClicker() {
         update("stuffGot", gameData.stuff + " stuff")
         update("buyAutoClicker", "buy an auto clicker, cost: " + gameData.autoClickerCost)
         update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
-            Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
-                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second")
+        format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "engineering") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
+            gameData.stuffPerClick * gameData.prestigeMultiplier), "engineering") + " stuff per second")
         if (gameData.autoClickers == 1) {
             toggleAutoClickers()
         } else {
@@ -102,10 +102,10 @@ function toggleAutoClickers() {
 }
 
 function autoClick() {
-    gameData.stuff = Math.round(10 * (gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))) / 10
-    gameData.totalStuff = Math.round(10 * (gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))) / 10
-    update("stuffGot", gameData.stuff + " stuff")
-    update("totalStuffGot", "total stuff got: " + gameData.totalStuff)
+    gameData.stuff = format((gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3)), "engineering")
+    gameData.totalStuff = format((gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3)), "engineering")
+    update("stuffGot", format(gameData.stuff, "engineering") + " stuff")
+    update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff, "engineering"))
 }
 
 var saveGameLoop = window.setInterval(function () {
@@ -126,9 +126,17 @@ function reload() {
     update("prestige", "cost: " + gameData.prestigeCost + ", level: " + gameData.prestigeLevel)
     update("buyAutoClicker", "buy an auto clicker, cost: " + gameData.autoClickerCost)
     update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
-        Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
-            gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second")
+        format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "engineering") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
+            gameData.stuffPerClick * gameData.prestigeMultiplier), "engineering") + " stuff per second")
     update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
+}
+
+function format(number, type) {
+	let exponent = Math.floor(Math.log10(number))
+	let mantissa = number / Math.pow(10, exponent)
+	if (exponent < 3) return number.toFixed(1)
+	if (type == "scientific") return mantissa.toFixed(2) + "e" + exponent
+	if (type == "engineering") return (Math.pow(10, exponent % 3) * mantissa).toFixed(2) + "e" + (Math.floor(exponent / 3) * 3)
 }
 
 reload()
