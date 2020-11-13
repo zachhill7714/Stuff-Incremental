@@ -39,8 +39,8 @@ function getStuffPerClick() {
         document.getElementById("stuffGot").innerHTML = gameData.stuff + " stuff"
         document.getElementById("stuffPerClick").innerHTML = "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click"
         document.getElementById("autoClickers").innerHTML = "you have " + gameData.autoClickers + " autoclickers, clicking " +
-            Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
-                gameData.stuffPerClick * gameData.prestigeMultiplier) / 1000 + " stuff per second"
+            Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
+                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second"
     }
 }
 
@@ -67,8 +67,8 @@ function prestige() {
         document.getElementById("prestige").innerHTML = "cost: " + gameData.prestigeCost + ", level: " + gameData.prestigeLevel
         document.getElementById("buyAutoClicker").innerHTML = "buy an auto clicker, cost: " + gameData.autoClickerCost
         document.getElementById("autoClickers").innerHTML = "you have " + gameData.autoClickers + " autoclickers, clicking " +
-            Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
-                gameData.stuffPerClick * gameData.prestigeMultiplier) / 1000 + " stuff per second"
+            Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
+                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second"
         document.getElementById("toggleAutoClickers").innerHTML = "toggles auto-clickers, currently: " + gameData.autoClicksOn
     }
 }
@@ -81,8 +81,8 @@ function buyAutoClicker() {
         document.getElementById("stuffGot").innerHTML = gameData.stuff + " stuff"
         document.getElementById("buyAutoClicker").innerHTML = "buy an auto clicker, cost: " + gameData.autoClickerCost
         document.getElementById("autoClickers").innerHTML = "you have " + gameData.autoClickers + " autoclickers, clicking " +
-            Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
-                gameData.stuffPerClick * gameData.prestigeMultiplier) / 1000 + " stuff per second"
+            Math.round(1000 * (10 * gameData.autoClickers / gameData.autoClickInterval)) / 10 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
+                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second"
         if (gameData.autoClickers == 1) {
             toggleAutoClickers()
         } else {
@@ -106,8 +106,8 @@ function toggleAutoClickers() {
 }
 
 function autoClick() {
-    gameData.stuff = Math.round(1000 * (gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))) / 1000
-    gameData.totalStuff = Math.round(1000 * (gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))) / 1000
+    gameData.stuff = Math.round(10 * (gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))) / 10
+    gameData.totalStuff = Math.round(10 * (gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))) / 10
     document.getElementById("stuffGot").innerHTML = gameData.stuff + " stuff"
     document.getElementById("totalStuffGot").innerHTML = "total stuff got: " + gameData.totalStuff
 }
