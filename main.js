@@ -25,8 +25,8 @@ function update(id, content) {
 function getStuff() {
     gameData.stuff += gameData.stuffPerClick * gameData.prestigeMultiplier
     gameData.totalStuff += gameData.stuffPerClick * gameData.prestigeMultiplier
-    update("stuffGot", format(gameData.stuff, "engineering") + " stuff")
-    update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff, "engineering"))
+    update("stuffGot", format(gameData.stuff, "scientific") + " stuff")
+    update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff, "scientific"))
 }
 
 function getStuffPerClick() {
@@ -35,7 +35,7 @@ function getStuffPerClick() {
         if (gameData.stuffPerClickLevel == 1) {
             gameData.stuffPerClick *= 2
         } else {
-            gameData.stuffPerClick = format((gameData.stuffPerClickLevel ** 2), "engineering")
+            gameData.stuffPerClick = format((gameData.stuffPerClickLevel ** 2), "scientific")
         }
         gameData.stuff -= gameData.stuffPerClickCost
         gameData.stuffPerClickCost *= 5
@@ -43,8 +43,8 @@ function getStuffPerClick() {
         update("stuffGot", gameData.stuff + " stuff")
         update("stuffPerClick", "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click")
         update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
-        format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "engineering") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
-            gameData.stuffPerClick * gameData.prestigeMultiplier), "engineering") + " stuff per second")
+        format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "scientific") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
+            gameData.stuffPerClick * gameData.prestigeMultiplier), "scientific") + " stuff per second")
     }
 }
 
@@ -62,7 +62,7 @@ function prestige() {
         if (gameData.prestigeLevel == 1) {
             gameData.prestigeCost *= 10
         } else {
-            gameData.prestigeCost *= format(10 * Math.round(gameData.prestigeLevel ** 1.5), "engineering")
+            gameData.prestigeCost *= format(10 * Math.round(gameData.prestigeLevel ** 1.5), "scientific")
         }
         gameData.prestigeMultiplier += gameData.prestigeLevel
         reload()
@@ -73,12 +73,12 @@ function buyAutoClicker() {
     if (gameData.stuff >= gameData.autoClickerCost) {
         gameData.stuff -= gameData.autoClickerCost
         gameData.autoClickers += 1
-        gameData.autoClickerCost = format((gameData.autoClickerCost * 1.15), "engineering")
+        gameData.autoClickerCost = format((gameData.autoClickerCost * 1.15), "scientific")
         update("stuffGot", gameData.stuff + " stuff")
         update("buyAutoClicker", "buy an auto clicker, cost: " + gameData.autoClickerCost)
         update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
-        format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "engineering") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
-            gameData.stuffPerClick * gameData.prestigeMultiplier), "engineering") + " stuff per second")
+        format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "scientific") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
+            gameData.stuffPerClick * gameData.prestigeMultiplier), "scientific") + " stuff per second")
         if (gameData.autoClickers == 1) {
             toggleAutoClickers()
         } else {
@@ -102,10 +102,10 @@ function toggleAutoClickers() {
 }
 
 function autoClick() {
-    gameData.stuff = format((gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3)), "engineering")
-    gameData.totalStuff = format((gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3)), "engineering")
-    update("stuffGot", format(gameData.stuff, "engineering") + " stuff")
-    update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff, "engineering"))
+    gameData.stuff = format((gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3)), "scientific")
+    gameData.totalStuff = format((gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3)), "scientific")
+    update("stuffGot", format(gameData.stuff, "scientific") + " stuff")
+    update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff, "scientific"))
 }
 
 var saveGameLoop = window.setInterval(function () {
@@ -126,8 +126,8 @@ function reload() {
     update("prestige", "cost: " + gameData.prestigeCost + ", level: " + gameData.prestigeLevel)
     update("buyAutoClicker", "buy an auto clicker, cost: " + gameData.autoClickerCost)
     update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
-        format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "engineering") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
-            gameData.stuffPerClick * gameData.prestigeMultiplier), "engineering") + " stuff per second")
+        format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "scientific") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
+            gameData.stuffPerClick * gameData.prestigeMultiplier), "scientific") + " stuff per second")
     update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
 }
 
@@ -136,7 +136,7 @@ function format(number, type) {
 	let mantissa = number / Math.pow(10, exponent)
 	if (exponent < 3) return number.toFixed(1)
 	if (type == "scientific") return mantissa.toFixed(2) + "e" + exponent
-	if (type == "engineering") return (Math.pow(10, exponent % 3) * mantissa).toFixed(2) + "e" + (Math.floor(exponent / 3) * 3)
+	if (type == "scientific") return (Math.pow(10, exponent % 3) * mantissa).toFixed(2) + "e" + (Math.floor(exponent / 3) * 3)
 }
 
 reload()
