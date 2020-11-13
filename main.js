@@ -120,5 +120,3 @@ var savegame = JSON.parse(localStorage.getItem("save"))
 if (savegame !== null) {
     gameData = savegame
 }
-
-//fuck vscode it sucks dick
