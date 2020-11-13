@@ -102,8 +102,8 @@ function toggleAutoClickers() {
 }
 
 function autoClick() {
-    gameData.stuff = format((gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3)), "scientific")
-    gameData.totalStuff = format((gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3)), "scientific")
+    gameData.stuff = (gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))
+    gameData.totalStuff = (gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))
     update("stuffGot", format(gameData.stuff, "scientific") + " stuff")
     update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff, "scientific"))
 }
