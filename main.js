@@ -120,3 +120,10 @@ var savegame = JSON.parse(localStorage.getItem("save"))
 if (savegame !== null) {
     gameData = savegame
 }
+
+
+/**
+ * why is vscode being a prick
+ * i just want to code man
+ * 
+ */
