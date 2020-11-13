@@ -35,7 +35,7 @@ function getStuffPerClick() {
         if (gameData.stuffPerClickLevel == 1) {
             gameData.stuffPerClick *= 2
         } else {
-            gameData.stuffPerClick = (gameData.stuffPerClickLevel ** 2)
+            gameData.stuffPerClick = format((gameData.stuffPerClickLevel ** 2), "engineering")
         }
         gameData.stuff -= gameData.stuffPerClickCost
         gameData.stuffPerClickCost *= 5
@@ -62,7 +62,7 @@ function prestige() {
         if (gameData.prestigeLevel == 1) {
             gameData.prestigeCost *= 10
         } else {
-            gameData.prestigeCost *= 10 * Math.round(gameData.prestigeLevel ** 1.5)
+            gameData.prestigeCost *= format(10 * Math.round(gameData.prestigeLevel ** 1.5), "engineering")
         }
         gameData.prestigeMultiplier += gameData.prestigeLevel
         reload()
@@ -73,7 +73,7 @@ function buyAutoClicker() {
     if (gameData.stuff >= gameData.autoClickerCost) {
         gameData.stuff -= gameData.autoClickerCost
         gameData.autoClickers += 1
-        gameData.autoClickerCost = Math.round(gameData.autoClickerCost * 1.15)
+        gameData.autoClickerCost = format((gameData.autoClickerCost * 1.15), "engineering")
         update("stuffGot", gameData.stuff + " stuff")
         update("buyAutoClicker", "buy an auto clicker, cost: " + gameData.autoClickerCost)
         update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
