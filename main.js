@@ -20,13 +20,13 @@ var updateTitle = window.setInterval(function () {
 
 function update(id, content) {
     document.getElementById(id).innerHTML = content;
-  }
+}
 
 function getStuff() {
     gameData.stuff += gameData.stuffPerClick * gameData.prestigeMultiplier
     gameData.totalStuff += gameData.stuffPerClick * gameData.prestigeMultiplier
-    update(stuffGot, gameData.stuff + " stuff")
-    update(totalStuffGot, "total stuff got: " + gameData.totalStuff)
+    update("stuffGot", gameData.stuff + " stuff")
+    update("totalStuffGot", "total stuff got: " + gameData.totalStuff)
 }
 
 function getStuffPerClick() {
@@ -40,11 +40,11 @@ function getStuffPerClick() {
         gameData.stuff -= gameData.stuffPerClickCost
         gameData.stuffPerClickCost *= 5
         update("getStuffPerClick", "buy stuff per click, cost: " + gameData.stuffPerClickCost + ", level: " + gameData.stuffPerClickLevel)
-        document.getElementById("stuffGot").innerHTML = gameData.stuff + " stuff"
-        document.getElementById("stuffPerClick").innerHTML = "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click"
-        document.getElementById("autoClickers").innerHTML = "you have " + gameData.autoClickers + " autoclickers, clicking " +
+        update("stuffGot", gameData.stuff + " stuff")
+        update("stuffPerClick", "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click")
+        update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
             Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
-                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second"
+                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second")
     }
 }
 
@@ -65,15 +65,7 @@ function prestige() {
             gameData.prestigeCost *= 10 * Math.round(gameData.prestigeLevel ** 1.5)
         }
         gameData.prestigeMultiplier += gameData.prestigeLevel
-        document.getElementById("stuffGot").innerHTML = gameData.stuff + " stuff"
-        document.getElementById("getStuffPerClick").innerHTML = "buy stuff per click, cost: " + gameData.stuffPerClickCost + ", level: " + gameData.stuffPerClickLevel
-        document.getElementById("stuffPerClick").innerHTML = "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click"
-        document.getElementById("prestige").innerHTML = "cost: " + gameData.prestigeCost + ", level: " + gameData.prestigeLevel
-        document.getElementById("buyAutoClicker").innerHTML = "buy an auto clicker, cost: " + gameData.autoClickerCost
-        document.getElementById("autoClickers").innerHTML = "you have " + gameData.autoClickers + " autoclickers, clicking " +
-            Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
-                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second"
-        document.getElementById("toggleAutoClickers").innerHTML = "toggles auto-clickers, currently: " + gameData.autoClicksOn
+        reload()
     }
 }
 
@@ -82,18 +74,18 @@ function buyAutoClicker() {
         gameData.stuff -= gameData.autoClickerCost
         gameData.autoClickers += 1
         gameData.autoClickerCost = Math.round(gameData.autoClickerCost * 1.15)
-        document.getElementById("stuffGot").innerHTML = gameData.stuff + " stuff"
-        document.getElementById("buyAutoClicker").innerHTML = "buy an auto clicker, cost: " + gameData.autoClickerCost
-        document.getElementById("autoClickers").innerHTML = "you have " + gameData.autoClickers + " autoclickers, clicking " +
-            Math.round(1000 * (10 * gameData.autoClickers / gameData.autoClickInterval)) / 10 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
-                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second"
+        update("stuffGot", gameData.stuff + " stuff")
+        update("buyAutoClicker", "buy an auto clicker, cost: " + gameData.autoClickerCost)
+        update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
+            Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
+                gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second")
         if (gameData.autoClickers == 1) {
             toggleAutoClickers()
         } else {
             toggleAutoClickers()
             toggleAutoClickers()
         }
-        document.getElementById("toggleAutoClickers").innerHTML = "toggles auto-clickers, currently: " + gameData.autoClicksOn
+        update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
     }
 }
 
@@ -101,19 +93,19 @@ function toggleAutoClickers() {
     if (gameData.autoClicksOn || gameData.autoClickers == 0) {
         gameData.autoClicksOn = false
         clearInterval(gameData.autoClicks)
-        document.getElementById("toggleAutoClickers").innerHTML = "toggles auto-clickers, currently: " + gameData.autoClicksOn
+        update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
     } else {
         gameData.autoClicksOn = true
         gameData.autoClicks = setInterval(autoClick, 33)
-        document.getElementById("toggleAutoClickers").innerHTML = "toggles auto-clickers, currently: " + gameData.autoClicksOn
+        update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
     }
 }
 
 function autoClick() {
     gameData.stuff = Math.round(10 * (gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))) / 10
     gameData.totalStuff = Math.round(10 * (gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))) / 10
-    document.getElementById("stuffGot").innerHTML = gameData.stuff + " stuff"
-    document.getElementById("totalStuffGot").innerHTML = "total stuff got: " + gameData.totalStuff
+    update("stuffGot", gameData.stuff + " stuff")
+    update("totalStuffGot", "total stuff got: " + gameData.totalStuff)
 }
 
 var saveGameLoop = window.setInterval(function () {
@@ -123,4 +115,20 @@ var saveGameLoop = window.setInterval(function () {
 var savegame = JSON.parse(localStorage.getItem("save"))
 if (savegame !== null) {
     gameData = savegame
+    reload()
 }
+
+function reload() {
+    update("stuffGot", gameData.stuff + " stuff")
+    update("totalStuffGot", "total stuff got: " + gameData.totalStuff)
+    update("getStuffPerClick", "buy stuff per click, cost: " + gameData.stuffPerClickCost + ", level: " + gameData.stuffPerClickLevel)
+    update("stuffPerClick", "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click")
+    update("prestige", "cost: " + gameData.prestigeCost + ", level: " + gameData.prestigeLevel)
+    update("buyAutoClicker", "buy an auto clicker, cost: " + gameData.autoClickerCost)
+    update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
+        Math.round(1000 * (1000 * gameData.autoClickers / gameData.autoClickInterval)) / 1000 + " times per second for " + Math.round(10 * (1000 * gameData.autoClickers / gameData.autoClickInterval) *
+            gameData.stuffPerClick * gameData.prestigeMultiplier) / 10 + " stuff per second")
+    update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
+}
+
+reload()
