@@ -139,4 +139,22 @@ function format(number, type) {
 	if (type == "scientific") return (Math.pow(10, exponent % 3) * mantissa).toFixed(2) + "e" + (Math.floor(exponent / 3) * 3)
 }
 
+function resetGame() {
+    if(confirm("are you sure you want to reset your save? this cannot be undone")) {
+        gameData.stuff = 0
+        gameData.totalStuff= 0
+        gameData.stuffPerClick= 1
+        gameData.stuffPerClickCost= 10
+        gameData.stuffPerClickLevel= 0
+        gameData.prestigeLevel= 0
+        gameData.prestigeCost= 10000
+        gameData.prestigeMultiplier= 1
+        gameData.autoClickers= 0
+        gameData.autoClickerCost= 100
+        gameData.autoClickInterval= 3000
+        gameData.autoClicksOn=false
+        gameData.autoClicks = 0
+    }
+}
+
 reload()
