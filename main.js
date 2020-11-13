@@ -128,4 +128,7 @@ if (savegame !== null) {
  * wait is it
  * 
  * take 2 maybe
+ * 
+ * 
+ * ok is it the checkmark or push thgats pushing in
  */
