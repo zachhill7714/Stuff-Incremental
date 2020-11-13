@@ -73,9 +73,9 @@ function buyAutoClicker() {
     if (gameData.stuff >= gameData.autoClickerCost) {
         gameData.stuff -= gameData.autoClickerCost
         gameData.autoClickers += 1
-        gameData.autoClickerCost = format((gameData.autoClickerCost * 1.15), "scientific")
+        gameData.autoClickerCost *= 1.15
         update("stuffGot", gameData.stuff + " stuff")
-        update("buyAutoClicker", "buy an auto clicker, cost: " + gameData.autoClickerCost)
+        update("buyAutoClicker", "buy an auto clicker, cost: " + format(gameData.autoClickerCost), "scientific")
         update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
         format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "scientific") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
             gameData.stuffPerClick * gameData.prestigeMultiplier), "scientific") + " stuff per second")
@@ -124,7 +124,7 @@ function reload() {
     update("getStuffPerClick", "buy stuff per click, cost: " + gameData.stuffPerClickCost + ", level: " + gameData.stuffPerClickLevel)
     update("stuffPerClick", "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click")
     update("prestige", "cost: " + gameData.prestigeCost + ", level: " + gameData.prestigeLevel)
-    update("buyAutoClicker", "buy an auto clicker, cost: " + gameData.autoClickerCost)
+    update("buyAutoClicker", "buy an auto clicker, cost: " + format(gameData.autoClickerCost), "scientific")
     update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
         format(((1000 * gameData.autoClickers / gameData.autoClickInterval)), "scientific") + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
             gameData.stuffPerClick * gameData.prestigeMultiplier), "scientific") + " stuff per second")
