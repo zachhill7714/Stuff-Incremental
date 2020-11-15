@@ -14,10 +14,6 @@ var gameData = {
     autoClicks: 0
 }
 
-var updateTitle = window.setInterval(function () {
-    document.title = "Stuff Incremental - " + format(gameData.stuff) + " stuff"
-}, 2000)
-
 function update(id, content) {
     document.getElementById(id).innerHTML = content;
 }
@@ -25,8 +21,6 @@ function update(id, content) {
 function getStuff() {
     gameData.stuff += gameData.stuffPerClick * gameData.prestigeMultiplier
     gameData.totalStuff += gameData.stuffPerClick * gameData.prestigeMultiplier
-    update("stuffGot", format(gameData.stuff) + " stuff")
-    update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff))
 }
 
 function getStuffPerClick() {
@@ -35,16 +29,10 @@ function getStuffPerClick() {
         if (gameData.stuffPerClickLevel == 1) {
             gameData.stuffPerClick *= 2
         } else {
-            gameData.stuffPerClick = format((gameData.stuffPerClickLevel ** 2))
+            gameData.stuffPerClick = (gameData.stuffPerClickLevel ** 2)
         }
         gameData.stuff -= gameData.stuffPerClickCost
         gameData.stuffPerClickCost *= 5
-        update("getStuffPerClick", "buy stuff per click, cost: " + gameData.stuffPerClickCost + ", level: " + gameData.stuffPerClickLevel)
-        update("stuffGot", gameData.stuff + " stuff")
-        update("stuffPerClick", "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click")
-        update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
-        format(((1000 * gameData.autoClickers / gameData.autoClickInterval))) + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
-            gameData.stuffPerClick * gameData.prestigeMultiplier)) + " stuff per second")
     }
 }
 
@@ -62,10 +50,9 @@ function prestige() {
         if (gameData.prestigeLevel == 1) {
             gameData.prestigeCost *= 10
         } else {
-            gameData.prestigeCost *= format(10 * Math.round(gameData.prestigeLevel ** 1.5))
+            gameData.prestigeCost *= 10 * Math.round(gameData.prestigeLevel ** 1.5)
         }
         gameData.prestigeMultiplier += gameData.prestigeLevel
-        reload()
     }
 }
 
@@ -74,18 +61,12 @@ function buyAutoClicker() {
         gameData.stuff -= gameData.autoClickerCost
         gameData.autoClickers += 1
         gameData.autoClickerCost *= 1.15
-        update("stuffGot", gameData.stuff + " stuff")
-        update("buyAutoClicker", "buy an auto clicker, cost: " + format(gameData.autoClickerCost))
-        update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
-        format(((1000 * gameData.autoClickers / gameData.autoClickInterval))) + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
-            gameData.stuffPerClick * gameData.prestigeMultiplier)) + " stuff per second")
         if (gameData.autoClickers == 1) {
             toggleAutoClickers()
         } else {
             toggleAutoClickers()
             toggleAutoClickers()
         }
-        update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
     }
 }
 
@@ -93,31 +74,27 @@ function toggleAutoClickers() {
     if (gameData.autoClicksOn || gameData.autoClickers == 0) {
         gameData.autoClicksOn = false
         clearInterval(gameData.autoClicks)
-        update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
     } else {
         gameData.autoClicksOn = true
         gameData.autoClicks = setInterval(autoClick, 33)
-        update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
     }
 }
 
 function autoClick() {
     gameData.stuff = (gameData.stuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))
     gameData.totalStuff = (gameData.totalStuff + (gameData.autoClickers * (gameData.stuffPerClick * gameData.prestigeMultiplier) / 30 / 3))
-    update("stuffGot", format(gameData.stuff) + " stuff")
-    update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff))
 }
 
-function reload() {
-    update("stuffGot", gameData.stuff + " stuff")
-    update("totalStuffGot", "total stuff got: " + gameData.totalStuff)
-    update("getStuffPerClick", "buy stuff per click, cost: " + gameData.stuffPerClickCost + ", level: " + gameData.stuffPerClickLevel)
-    update("stuffPerClick", "you are getting " + gameData.stuffPerClick * gameData.prestigeMultiplier + " stuff per click")
-    update("prestige", "cost: " + gameData.prestigeCost + ", level: " + gameData.prestigeLevel)
+function masterUpdate() {
+    update("stuffGot", format(gameData.stuff) + " stuff")
+    update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff))
+    update("getStuffPerClick", "buy stuff per click, cost: " + format(gameData.stuffPerClickCost) + ", level: " + format(gameData.stuffPerClickLevel))
+    update("stuffPerClick", "you are getting " + format(gameData.stuffPerClick * gameData.prestigeMultiplier) + " stuff per click")
+    update("prestige", "cost: " + format(gameData.prestigeCost) + ", level: " + format(gameData.prestigeLevel))
     update("buyAutoClicker", "buy an auto clicker, cost: " + format(gameData.autoClickerCost))
-    update("autoClickers", "you have " + gameData.autoClickers + " autoclickers, clicking " +
-        format(((1000 * gameData.autoClickers / gameData.autoClickInterval))) + " times per second for " + format(((1000 * gameData.autoClickers / gameData.autoClickInterval) *
-            gameData.stuffPerClick * gameData.prestigeMultiplier)) + " stuff per second")
+    update("autoClickers", "you have " + format(gameData.autoClickers) + " autoclickers, clicking " +
+        format(1000 * gameData.autoClickers / gameData.autoClickInterval) + " times per second for " + format(1000 * gameData.autoClickers / gameData.autoClickInterval *
+            gameData.stuffPerClick * gameData.prestigeMultiplier) + " stuff per second")
     update("toggleAutoClickers", "toggles auto-clickers, currently: " + gameData.autoClicksOn)
 }
 
@@ -155,3 +132,9 @@ if (savegame !== null) {
     gameData = savegame
     reload()
 }
+
+var mUpdate = setInterval(masterUpdate, 33)
+
+var updateTitle = window.setInterval(function () {
+    document.title = "Stuff Incremental - " + format(gameData.stuff) + " stuff"
+}, 2000)
