@@ -104,26 +104,26 @@ function masterUpdate() {
 }
 
 function format(number) {
-	let exponent = Math.floor(Math.log10(number))
-	let mantissa = number / Math.pow(10, exponent)
-	if (exponent < 3) return number.toFixed(1)
-	else return mantissa.toFixed(3) + "e" + exponent
+    let exponent = Math.floor(Math.log10(number))
+    let mantissa = number / Math.pow(10, exponent)
+    if (exponent < 3) return number.toFixed(1)
+    else return mantissa.toFixed(3) + "e" + exponent
 }
 
 function resetGame() {
-    if(confirm("are you sure you want to reset your save? this cannot be undone")) {
+    if (confirm("are you sure you want to reset your save? this cannot be undone")) {
         gameData.stuff = 0
-        gameData.totalStuff= 0
-        gameData.stuffPerClick= 1
-        gameData.stuffPerClickCost= 10
-        gameData.stuffPerClickLevel= 0
-        gameData.prestigeLevel= 0
-        gameData.prestigeCost= 10000
-        gameData.prestigeMultiplier= 1
-        gameData.autoClickers= 0
-        gameData.autoClickerCost= 100
-        gameData.autoClickInterval= 3000
-        gameData.autoClicksOn=false
+        gameData.totalStuff = 0
+        gameData.stuffPerClick = 1
+        gameData.stuffPerClickCost = 10
+        gameData.stuffPerClickLevel = 0
+        gameData.prestigeLevel = 0
+        gameData.prestigeCost = 10000
+        gameData.prestigeMultiplier = 1
+        gameData.autoClickers = 0
+        gameData.autoClickerCost = 100
+        gameData.autoClickInterval = 3000
+        gameData.autoClicksOn = false
         gameData.autoClicks = 0
     }
 }
@@ -138,7 +138,7 @@ if (savegame !== null) {
 }
 
 var mUpdate = setInterval(masterUpdate, 33)
-if(gameData.autoClicksOn) {
+if (gameData.autoClicksOn) {
     gameData.autoClicks = setInterval(autoClick, 33)
 }
 

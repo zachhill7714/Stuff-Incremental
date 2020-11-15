@@ -5,30 +5,40 @@
 
 <head>
   <title>Stuff Incremental - 0 stuff</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
   <script src="main.js" charset="utf-8" type="text/javascript"></script>
+
   <body>
     <p id="stuffGot" style="font-size: x-large; font-weight: bold; margin-top: 50px; text-align: center">0 stuff</p>
-    <button type="button" onclick="getStuff()" class="btn btn-info btn-lg" data-toggle="modal"
-      data-target="#myModal" style="">get stuff</button>
-    <p id="stuffPerClick">you are getting 1 stuff per click</p>
-    <button onClick="getStuffPerClick()" id="getStuffPerClick">buy stuff per click, cost: 10, level: 0</button>
-    <p id="autoClickers">you have 0 autoclickers, clicking 0 times per second for 0 stuff per second</p>
-    <button onClick="buyAutoClicker()" id="buyAutoClicker">buy an auto clicker, cost: 100</button>
-    <button onClick="toggleAutoClickers()" id="toggleAutoClickers">toggles auto-clickers, currently: false</button>
-    <p>buy this to prestige, resetting stuff, stuff per click, and autoclickers for a boost</p>
-    <button onClick="prestige()" id="prestige">cost: 10000, level: 0</button>
-    <p id="totalStuffGot">total stuff got: 0</p>
-    <button id="resetGame" onClick="resetGame()">reset the game</button>
+
+    <button type="button" onclick="getStuff()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"
+      style="margin-left: 2.5%; margin-top: 2.5%">get stuff</button>
+
+    <p id="stuffPerClick" style="margin-left: 5%">you are getting 1 stuff per click</p>
+
+    <button onClick="getStuffPerClick()" id="getStuffPerClick" style="margin-left: 2.5%">buy stuff per click, cost: 10,
+      level: 0</button>
+
+    <p id="autoClickers" style="margin-left: 5%">you have 0 autoclickers, clicking 0 times per second for 0 stuff per
+      second</p>
+
+    <button onClick="buyAutoClicker()" id="buyAutoClicker" style="margin-left: 2.5%">buy an auto clicker, cost:
+      100</button>
+
+    <button onClick="toggleAutoClickers()" id="toggleAutoClickers" style="margin-left: 2.5%">toggles auto-clickers,
+      currently: false</button>
+
+    <p style="margin-left: 5%">buy this to prestige, resetting stuff, stuff per click, and autoclickers for a boost
+    </p>
+
+    <button onClick="prestige()" id="prestige" style="margin-left: 2.5%">cost: 1e4, level: 0</button>
+
+    <p id="totalStuffGot" style="margin-left: 5%">total stuff got: 0</p>
+
+    <button id="resetGame" onClick="resetGame()" style="margin-left: 2.5%">reset the game</button>
+
   </body>
 
 </html>
