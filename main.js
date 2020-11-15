@@ -138,6 +138,10 @@ if (savegame !== null) {
 }
 
 var mUpdate = setInterval(masterUpdate, 33)
+if(gameData.autoClicksOn) {
+    toggleAutoClickers()
+    toggleAutoClickers()
+}
 
 var updateTitle = window.setInterval(function () {
     document.title = "Stuff Incremental - " + format(gameData.stuff) + " stuff"
