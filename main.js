@@ -15,7 +15,7 @@ var gameData = {
 }
 
 var updateTitle = window.setInterval(function () {
-    document.title = "Stuff Incremental - " + gameData.stuff + " stuff"
+    document.title = "Stuff Incremental - " + format(gameData.stuff) + " stuff"
 }, 2000)
 
 function update(id, content) {
@@ -25,7 +25,7 @@ function update(id, content) {
 function getStuff() {
     gameData.stuff += gameData.stuffPerClick * gameData.prestigeMultiplier
     gameData.totalStuff += gameData.stuffPerClick * gameData.prestigeMultiplier
-    update("stuffGot", format(gameData.stuff, "scientific") + " stuff")
+    update("stuffGot", format(gameData.stuff) + " stuff")
     update("totalStuffGot", "total stuff got: " + format(gameData.totalStuff))
 }
 
