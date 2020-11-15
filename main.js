@@ -139,8 +139,7 @@ if (savegame !== null) {
 
 var mUpdate = setInterval(masterUpdate, 33)
 if(gameData.autoClicksOn) {
-    toggleAutoClickers()
-    toggleAutoClickers()
+    gameData.autoClicks = setInterval(autoClick, 33)
 }
 
 var updateTitle = window.setInterval(function () {
