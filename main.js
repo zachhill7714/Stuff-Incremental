@@ -145,5 +145,3 @@ if(gameData.autoClicksOn) {
 var updateTitle = window.setInterval(function () {
     document.title = "Stuff Incremental - " + format(gameData.stuff) + " stuff"
 }, 2000)
-
-// hi comment
